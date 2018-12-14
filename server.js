@@ -13,6 +13,7 @@ app.use(compression());
 
 app.ws('/echo', function (ws, req) {
     ws.on('message', function (msg) {
+        console.log("Received: %j - responding", msg)
         ws.send(msg);
     });
 });
