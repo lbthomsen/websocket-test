@@ -25,7 +25,7 @@
             else
                 protocol = "ws";
 
-                var ws = $websocket(protocol + "://" + $location.$$host + ":" + $location.$$port + "/echo");
+                var ws = $websocket(protocol + "://" + $location.$$host + ":" + $location.$$port + "/");
 
             var me = {
                 send: function(msg) {

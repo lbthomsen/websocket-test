@@ -11,16 +11,22 @@ var ws = expressWs(app);
 
 app.use(compression());
 
-app.ws('/echo', function (ws, req) {
+app.ws('/', function (ws, req) {
+    console.log("Got Websocket request: " + req.path + " ", JSON.stringify(req.headers, null, 4));
     ws.on('message', function (msg) {
         console.log("Received: %j - responding", msg)
         ws.send(msg);
     });
 });
 
-app.use("/", express.static("./"));
+//app.use("/", express.static("./"));
+app.use("/", function(req, res, next) {
+    console.log("Got request: " + req.path + " ", JSON.stringify(req.headers, null, 4));
+    next();
+}, express.static("./"));
 
 app.get('/*', function (req, res) {
+    console.log("Got request: ", JSON.stringify(req.headers, null, 4));
     res.sendFile('index.html', { root: "./" });
 });
 
