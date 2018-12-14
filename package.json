@@ -1,0 +1,29 @@
+{
+  "name": "websocket-test",
+  "version": "0.0.1",
+  "description": "Websocket Client-Server Test",
+  "main": "server.js",
+  "scripts": {
+    "serve": "node server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lbthomsen/websocket-test.git"
+  },
+  "author": "Lars Boegild Thomsen <lbthomsen@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lbthomsen/websocket-test/issues"
+  },
+  "homepage": "https://github.com/lbthomsen/websocket-test#readme",
+  "dependencies": {
+    "angular": "^1.7.5",
+    "angular-websocket": "^2.0.1",
+    "bootstrap": "^4.1.3",
+    "compression": "^1.7.3",
+    "express": "^4.16.4",
+    "express-ws": "^4.0.0",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.6"
+  }
+}
