@@ -1,2 +1,2 @@
 # websocket-test
-Websocket Test
+Simple Websocket server (node) and client (angularjs) to demonstrate websocket communications.
