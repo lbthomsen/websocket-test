@@ -19,7 +19,6 @@ app.ws('/', function (ws, req) {
     });
 });
 
-//app.use("/", express.static("./"));
 app.use("/", function(req, res, next) {
     console.log("Got request: " + req.path + " ", JSON.stringify(req.headers, null, 4));
     next();

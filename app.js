@@ -9,12 +9,10 @@
         "ngWebSocket"
     ]);
 
-    app.run(["$log",
-        function ($log) {
-            $log.debug(appName + " starting");
-        }
-    ]);
-
+    /**
+     * WsService handles all the web socket communication.  Provides
+     * send() and listen to messages.
+     */
     app.factory("WsService", ["$log", "$rootScope", "$location", "$websocket",
         function ($log, $rootScope, $location, $websocket) {
             $log.debug("WsService: starting");
@@ -25,10 +23,10 @@
             else
                 protocol = "ws";
 
-                var ws = $websocket(protocol + "://" + $location.$$host + ":" + $location.$$port + "/");
+            var ws = $websocket(protocol + "://" + $location.$$host + ":" + $location.$$port + "/");
 
             var me = {
-                send: function(msg) {
+                send: function (msg) {
                     ws.send(msg);
                 }
             };
@@ -43,32 +41,32 @@
         }
     ]);
 
-    app.controller("WsTestController", ["$log", "$scope", "$interval", "WsService", 
-        function($log, $scope, $interval, wsService) {
+    app.controller("WsTestController", ["$log", "$scope", "$interval", "WsService",
+        function ($log, $scope, $interval, wsService) {
             $log.debug("WsTestController: starting");
 
             var that = this;
             that.messages = [];
 
-            that.expire = function() {
+            that.expire = function () {
                 while (that.messages.length > 20) that.messages.pop(); // Reduce length
             }
 
-            $scope.$on("WsMessage", function(type, message) {
+            $scope.$on("WsMessage", function (type, message) {
                 $log.debug("WsTestController: got message: %o", message.data);
                 that.messages.unshift({
-                    type: "Receive", 
-                    timestamp: new Date(), 
+                    type: "Receive",
+                    timestamp: new Date(),
                     message: message.data
                 });
                 that.expire();
             })
 
-            $interval(function() {
+            $interval(function () {
                 var msg = "Hello server - time is: " + new Date().getTime();
                 that.messages.unshift({
-                    type: "Send", 
-                    timestamp: new Date(), 
+                    type: "Send",
+                    timestamp: new Date(),
                     message: msg
                 });
                 that.expire();
@@ -78,12 +76,12 @@
     ]);
 
     app.directive("wsTest", [
-        function() {
+        function () {
             return {
-                restrict: "E", 
-                replace: true, 
-                templateUrl: "ws-test.directive.html", 
-                controller: "WsTestController", 
+                restrict: "E",
+                replace: true,
+                templateUrl: "ws-test.directive.html",
+                controller: "WsTestController",
                 controllerAs: "wsTestCtrl"
             }
         }
